@@ -34,3 +34,30 @@ int main() {
 	    cout<<f<<endl;
 	return 0;
 }
+=====================================================================================================
+	
+
+/* FIND DAY OF ANY GREGORIAN CALLENDER  SEE CENTUARY CODE , AND FORMULA */
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t,y,m = 0,d=1,l,c,cc[4]={6,4,2,0}; // m month code of january
+	string w[7] = {"sunday","monday","tuesday","wednesday","thursday","friday","saturday"};
+	cin>>t;     // w[] week aranged according to their day code
+	while(t--) {
+	    l = 0;
+	    cin>>y;
+	    int yy = y%100;
+	    int yc = (yy + yy/4)%7; // last two digit of year
+	    c = cc[ (y/100)%4 ];    // c for century code
+	   if(y%400 == 0 || (y%100 != 0 && y%4 == 0))
+	        l = 1;  // for leap year
+	   int dd = (yc + c + m + d - l)%7;
+	   cout<<w[dd]<<endl;
+	}   
+	return 0;
+}
+
