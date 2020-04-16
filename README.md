@@ -1,3 +1,5 @@
+1
+
 /*
   Test Cases  input || output
         1. CHEFCHEFF || 2   as [CHEF][CHEF]F
@@ -35,7 +37,7 @@ int main() {
 	return 0;
 }
 =====================================================================================================
-	
+2
 
 /* FIND DAY OF ANY GREGORIAN CALLENDER  SEE CENTUARY CODE , AND FORMULA */
 
@@ -62,6 +64,8 @@ int main() {
 }
 
 =========================================================================================
+3
+
 
 If the vector has [1, 2, 3]
 
@@ -108,3 +112,21 @@ vector<int> Solution::plusOne(vector<int> &A) {
     return A;
 }
 
+================================================================================
+4
+
+to find the max possible sum of sub-array of an array
+
+int subarray_with_max_possible_sum(int a[],int n) {
+	sum = 0;
+	best = 0;
+	for(int i=0;i<n;i++) {
+		sum = max(a[i],sum + a[i]);
+		if (i>0)
+			best = max(sum,best);
+		else
+			best = sum;
+	}
+}
+
+===================================================================================
