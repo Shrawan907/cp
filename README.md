@@ -184,7 +184,7 @@ Make sure the returned intervals are also sorted.
 
 solution (c++ 17):
 
-/**
+/*
  * Definition for an interval.		// these comments are added to know how Interval struct look like used in solution
  * struct Interval {
  *     int start;
@@ -196,9 +196,10 @@ solution (c++ 17):
  void swap(int * a,int *b) {
      *a ^= *b ^= *a ^= *b; 
  }
+ 
 vector<Interval> Solution::insert(vector<Interval> &intervals, Interval newInterval) {
-    int k = -1,j=-1;
-    if(intervals.size() == 0){			// if vector is empty
+	int k = -1,j=-1;
+   if(intervals.size() == 0){			// if vector is empty	
       intervals.push_back(newInterval);
       return intervals;
     } 
