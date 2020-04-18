@@ -130,3 +130,130 @@ int subarray_with_max_possible_sum(int a[],int n) {
 }
 
 ===================================================================================
+5
+
+
+Merge Intervals
+
+    Asked in:  
+    Google
+
+Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
+
+You may assume that the intervals were initially sorted according to their start times.
+
+Example 1:
+
+Given intervals [1,3],[6,9] insert and merge [2,5] would result in [1,5],[6,9].
+
+Example 2:
+
+Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] would result in [1,2],[3,10],[12,16].
+
+This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
+
+Make sure the returned intervals are also sorted.
+
+{
+	Hint for a question not given with a question-------------
+	
+	
+
+	Have you covered the following corner cases :
+
+	1) Size of interval array as 0.
+
+	2) newInterval being an interval preceding all intervals in the array.
+
+	    Given interval (3,6),(8,10), insert and merge (1,2)
+
+	3) newInterval being an interval succeeding all intervals in the array.
+
+	    Given interval (1,2), (3,6), insert and merge (8,10)
+
+	4) newInterval not overlapping with any interval and falling in between 2 intervals in the array.
+
+	    Given interval (1,2), (8,10) insert and merge (3,6) 
+
+	5) newInterval covering all given intervals.
+
+	    Given interval (3, 5), (7, 9) insert and merge (1, 10)
+
+
+}
+
+solution (c++ 17):
+
+/**
+ * Definition for an interval.		// these comments are added to know how Interval struct look like used in solution
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */	
+ void swap(int * a,int *b) {
+     *a ^= *b ^= *a ^= *b; 
+ }
+vector<Interval> Solution::insert(vector<Interval> &intervals, Interval newInterval) {
+    int k = -1,j=-1;
+    if(intervals.size() == 0){			// if vector is empty
+      intervals.push_back(newInterval);
+      return intervals;
+    } 
+    if(newInterval.end < newInterval.start)	// if interval given in oposite order
+        swap(&newInterval.start,&newInterval.end);
+    if(intervals[0].start > newInterval.end) {
+        reverse(intervals.begin(),intervals.end());
+        intervals.push_back(newInterval);
+        reverse(intervals.begin(),intervals.end());
+    }
+    if(intervals.back().end < newInterval.start){
+        intervals.push_back(newInterval);
+        return intervals;
+    }
+	/*
+						 how i think for finding the value of k and j
+						 vector index 	0	1	2	3	4	5
+						 possible k,j   0   1   2   3   4   5   6   7   8   9   10   11
+	*/
+    for(int i=0;i<intervals.size();i++) {
+        if(intervals[i].start <= newInterval.start) {
+            k++;
+            if(intervals[i].end < newInterval.start)
+                k++;
+        }
+        if(intervals[i].start <= newInterval.end) {
+            j++;
+            if(intervals[i].end < newInterval.end)
+                j++;
+            else
+                break;
+        } 
+        else
+            break;
+    }
+    int m = k/2,n=j/2;
+    if(k < 0)
+        m = 0;
+    else if(k%2 != 0)
+        m++;
+    else
+        newInterval.start = intervals[m].start;
+    newInterval.end = max(newInterval.end,intervals[n].end);
+    vector<Interval> I;
+	
+    for(int i=0;i<m;i++)
+        I.push_back(intervals[i]);
+	
+    I.push_back(newInterval);
+    
+    for(int i=n+1;i<intervals.size();i++)
+        I.push_back(intervals[i]);
+    return I;
+}
+
+========================================================================================
+
+
