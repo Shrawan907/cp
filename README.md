@@ -285,3 +285,59 @@ for i in range(0,n-1):
         c[i+1][1] = max(c[i][1],c[i+1][1])
 print(t) 
 
+======================================================================================
+7
+
+
+
+Given a collection of intervals, merge all overlapping intervals.
+
+For example:
+
+Given [1,3],[2,6],[8,10],[15,18],
+
+return [1,6],[8,10],[15,18].
+
+Make sure the returned intervals are sorted.
+
+
+
+
+# Definition for an interval.
+# class Interval:
+#     def __init__(self, s=0, e=0):
+#         self.start = s
+#         self.end = e
+(Python )
+class Solution:
+    # @param intervals, a list of Intervals
+    # @return a list of Interval
+    def merge(self, intervals):
+        t = []
+        for i in intervals:
+            a = i.start
+            b = i.end
+            if a>b:
+                c = a
+                a = b
+                b = c
+            t.append([a,b])
+        s = len(intervals)
+        t.sort()
+        for i in range(0,s):
+            intervals[i].start = t[i][0]
+            intervals[i].end = t[i][1]
+        t = []   
+        i=0
+        while(i<len(intervals)-1):
+            if(intervals[i].end >= intervals[i+1].start):
+                if intervals[i].end >= intervals[i+1].end:
+                    intervals.remove(intervals[i+1])
+                else:
+                    intervals[i].end = intervals[i+1].end
+                    intervals.remove(intervals[i+1])
+            else:
+                i+=1
+        return intervals
+
+
