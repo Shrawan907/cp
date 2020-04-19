@@ -256,5 +256,32 @@ vector<Interval> Solution::insert(vector<Interval> &intervals, Interval newInter
 }
 
 ========================================================================================
+6
 
+You are given n intervals, each from  to 
+
+. You need to merge overlapping intervals to form a new interval. After all possible merging is done, you have a new set of mutually exclusive intervals.
+Print the size of this new set of mutually exclusive intervals.
+
+Input Format
+
+    First line contains 
+
+, denoting number of intervals.
+Each of next
+lines will contain two integers, denoting and .
+
+n = int(input())
+c = []
+for i in range(0,n):
+    a,b = map(int,input().split())
+    c.append([a,b])
+c.sort()
+t=1
+for i in range(0,n-1):
+    if(c[i][1] < c[i+1][0]):
+        t+=1
+    else:
+        c[i+1][1] = max(c[i][1],c[i+1][1])
+print(t) 
 
