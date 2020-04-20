@@ -339,5 +339,31 @@ class Solution:
             else:
                 i+=1
         return intervals
+	
+============================================================================================
+8
+
+A=1 Z=26 AA=27 AB=28 AAA=703
+now find string back from number
+
+solution( c++17 ):
+
+string Solution::convertToTitle(int A) {
+    int x;
+    string C = "";
+    while(A>0) {
+        x = A%26;
+        if(x==0){
+            x = 26;
+            A-=26; 
+	    // we subtract 26 because for x > 0 it means that number x more then actual dividend no. but x = 0  means 26 more so generaly we forgot to subtract due to which wrong ans printed. this can be easily chek for A = 943566 whose right output: "BAQTZ"
+        }
+        A = A/26;
+        C += (char)(x+64);
+    }
+    reverse(C.begin(),C.end());
+    return C;
+}
+
 
 
