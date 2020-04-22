@@ -366,4 +366,38 @@ string Solution::convertToTitle(int A) {
 }
 
 
+======================< mast concept >============================
+9
+
+Rearrange a given array so that Arr[i] becomes Arr[Arr[i]] with O(1) extra space.
+
+Input : [1, 0]
+Return : [0, 1
+
+
+    Lets say N = size of the array. Then, following holds true :
+
+      1.  All elements in the array are in the range [0, N-1]
+      2.  N * N does not overflow for a signed integer
+
+solution: (c++)
+-----concept------
+ if it is possible that every index store two values old and new
+    let old val. a  and  new val b
+       if we sore values as a + bn
+       then val/n give new value and val%n give old val
+    1. increment every element by ( (A[i]%n)*n )
+    2. divide every element by n
+----------------
+void Solution::arrange(vector<int> &A) {
+    int n = A.size();
+    for(int i=0;i<n;i++) {
+        A[i] += (A[A[i]]%n)*n;
+    }
+    for(int i=0;i<n;i++) {
+        A[i] /= n;
+    }
+}
+
+========================================================================
 
