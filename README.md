@@ -400,4 +400,55 @@ void Solution::arrange(vector<int> &A) {
 }
 
 ========================================================================
+10
+
+Q. Find the way we can make total in different ways using different number of each coins,
+	example: n = 10 c = {2,5,3,6} (coins)
+	So we can make total as:
+	 2 2 2 2 2	= 10
+	 2 2 3 3 	= 10
+	 2 2 6		= 10
+	 2 3 5		= 10
+	 5 5 		= 10
+	 So there are 5 ways we can make total 10 from coins {2,5,3,6}.
+	 
+Sol (C++) :
+		(  Dynamic Programming  )
+
+map< pair<int,int>,long > m;	// declaring pair map
+long search(int n,int j,vector<long> c,int l) {
+    if(n < 0)
+        return 0;
+    if (n == 0) {
+        return 1;
+    }
+    if(m.count({n,j}))  // use of memorization 
+        return m[{n,j}];
+    else {
+        long t = 0;
+        long result = 0;
+        for(int i = j; i < l; i++) {
+            if(n-c[i] >= 0) {
+                result = search(n-c[i],i,c,l);
+                if (result > 0)
+                    t += result;
+            }
+            else    
+                break;	// we' break ' the loop here bcoz 'c' is sorted but if it was not we should use " continue ".
+        }
+        m[{n,j}] = t;	// assign value in paired map, it is used as memorization ( Dynamic programing )
+        return t;
+    }
+}
+
+long getWays(int n, vector<long> c) {
+    sort(c.begin(),c.end());		// sorting is not neccesory, we can skip this by making change in line 437
+    int l = (int) c.size();
+    return search(n,0,c,l);
+
+}
+
+int main() {
+  cout<< getWays( total amount to be made , set of coins ) << endl;
+ }
 
