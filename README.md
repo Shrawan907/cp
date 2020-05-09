@@ -452,3 +452,34 @@ int main() {
   cout<< getWays( total amount to be made , set of coins ) << endl;
  }
 
+================================================================
+11.
+
+Q
+Larry has been given a permutation of a sequence of natural numbers incrementing from 1 as an array. He must determine whether the array can be sorted using the following operation any number of times: 
+
+A		rotate 
+[1,6,5,2,4,3]	[6,5,2]
+[1,5,2,6,4,3]	[5,2,6]
+[1,2,6,5,4,3]	[5,4,3]
+[1,2,6,3,5,4]	[6,3,5]
+[1,2,3,5,6,4]	[5,6,4]
+[1,2,3,4,5,6]
+
+YES
+
+/*
+Yes, it seems very clear that it very hard to solve these question by doing rotation and check as the question said. Well the hint is given in previous comments is so helpful (thank to them), so the hidden approch for this question is same as to determine the solvability of n-puzzle game (i.e. checking the solution is exist or not). Spoiler alert! you have to check for each element that how many elements after its postion are smaller then it, and sum all these count you get for each element. now if the sum is even => solution possible ("YES")
+*/
+string larrysArray(vector<int> A) {
+    int n = A.size();
+    int sum = 0;
+    for(int i=0;i<n-1;i++)
+        for(int j = i+1;j<n;j++)
+            if(A[i] > A[j])
+                sum += 1;
+    if(sum%2 == 0)
+        return "YES";
+    else
+        return "NO";
+}
