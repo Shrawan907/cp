@@ -483,3 +483,80 @@ string larrysArray(vector<int> A) {
     else
         return "NO";
 }
+====================================================================
+12
+	
+Q
+Given an array of integers, determine whether the array can be sorted in ascending order using only one of the following operations one time.
+
+    Swap two elements.
+    Reverse one sub-segment.
+
+Determine whether one, both or neither of the operations will complete the task. If both work, choose swap. For instance, given an array [2,3,5,4] either swap the 4 and 5, or reverse them to sort the array. Choose swap. The Output Format section below details requirements. 
+ 
+< https://www.hackerrank.com/challenges/almost-sorted/problem >
+soln: 
+void almostSorted(vector<int> arr) {
+    int n=arr.size();
+    int r=0,j=0,k=0;
+    for(int i=1;i<n;i++) {
+        if(arr[i] < arr[i-1] ) {
+            if(r == 0) {		// for problem in neighbours
+                j = i-1;
+                k = i;
+                r = 1;
+            }
+            else if(r == 1 && k == i-1) {	// if this condition is gona true than surely "yes recursive" or "no" 
+                r = 2;
+                k = i;
+            } else if(r == 2 && k == i-1) {	// if update value k for recursive
+                k = i;
+            } else if(r == 1) {			//  i.e update k for swap 
+                k = i;
+                r = 3;
+            } else {				// for not possible
+                r = 4;
+            }
+        }
+    }
+    if(r == 0)
+        cout<<"yes"<<endl;
+    else if( r == 4)
+        cout<<"no"<<endl;
+    else {
+        if (j == k-1) {					// we also compare with neigbours if we perform that changes
+            if(j == 0 || arr[k] > arr[j-1]) {
+                if( k == n-1 || arr[j] < arr[k+1])
+                    cout<<"yes\nswap "<<j+1<<" "<<k+1;
+                else    
+                    cout<<"no";
+            } else  
+                cout<<"no";
+        }
+        else if(r == 2) {				// we also compare with neigbours if we perform that changes
+            if(j == 0 || arr[k] >= arr[j-1]) {
+                if(k == n-1 || arr[j] <= arr[k+1])
+                    cout<<"yes\nreverse "<<j+1<<" "<<k+1;
+                else    
+                    cout<<"no";
+            } else
+                cout<<"no";
+        }
+        else {						// we also compare with neigbours if we perform that changes
+            if(arr[k] <= arr[j+1]) {
+                if(j == 0 || arr[k] >= arr[j-1]) {
+                    if(arr[j] >= arr[k-1]) {
+                        if(k == n-1 || arr[j] <= arr[k+1])
+                            cout<<"yes\nswap "<<j+1<<" "<<k+1;
+                        else    
+                            cout<<"no";
+                    } else    
+                        cout<<"no";
+                } else 
+                    cout<<"no";
+            } else
+                cout<<"no";
+        }
+        cout<<endl;
+    }
+}
