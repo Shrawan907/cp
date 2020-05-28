@@ -8,10 +8,10 @@ this type of problem I faced during solving the below codding problem.
 
 well we can solve this as-
 
-  let, f(x) = t - ( ((h+c)*x + c) / (2*x + 1) )
+  let, f(x) = t - ( ((h+c)*x + c) / (2*x - 1) )
   for f(x) = 0 or nearest to 0,
   put f(x) = 0, and solve for x,
-  i.e. x = (h-t) / (2*t - (h+c))
+  i.e. x = (t - c) / (2*t - (h+c))
   take ceil and floor of x (as x is between or equal to values) , one these will give us our answer!
 **  
 codding question:
@@ -75,4 +75,44 @@ output
 7
 1
 
- 
+ans.=
+
+        while(test--){
+            cin>>h>>c>>t;
+
+            if(h==c && t==c){
+                cout<<1<<endl;
+                continue;
+            }
+
+
+            if(t<=(h+c)/2){
+                cout<<2<<endl;
+                continue;
+            }
+            
+            ll num1=ceil(double(t-c)/(2*t-(h+c)));
+            ll num2=num1-1;
+            ll a1=floor(double(t-c)/(2*t-(h+c)));
+            ll a2=a1-1;
+            double temp1=((num1*h + num2*c)/(num1+num2));
+            double temp2=((a1*h + a2*c)/(a1+a2));
+            double temp3=(h+c)/2;
+
+            temp1=abs(temp1-t);
+            temp2=abs(temp2-t);
+            temp3=abs(temp3-t);
+            vector<double> vc;
+            vc.push_back(temp1);
+            vc.push_back(temp2);
+            vc.push_back(temp3);
+            sort(vc.begin(),vc.end());
+            if(vc[0]==temp2)
+                cout<<a1+a2<<endl;
+            else if(vc[0]==temp1)
+                cout<<num1+num2<<endl;
+            else
+                cout<<2<<endl;
+        }
+        
+=======================================================
