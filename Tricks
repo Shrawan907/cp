@@ -1,0 +1,8 @@
+So some tricks added in this file 
+
+1. (for question like: < https://codeforces.com/contest/1380/problem/B >)
+
+like in game rock, paper, sissor we are given a string like SSSRRRPSRRSSSPSSPP where symbol have their corresponding meaning.
+we have to give a string such that if a player start from any index in the principle string than we should have max average win,
+
+the trick for this is: choose symbol which give max win with all character of principle string.
