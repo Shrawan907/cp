@@ -560,3 +560,66 @@ void almostSorted(vector<int> arr) {
         cout<<endl;
     }
 }
+		   
+		   
+========================================================================================
+
+14
+ move matrix to 90 degree in anticlock wise dir without in O(1) space
+ 
+ ans:
+ 
+ #include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin>>n;
+    int a[n][n];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++)
+            cin>>a[i][j];
+    }
+    int t,k,r,temp;
+    
+    for(int j=0;j<n;j++) {
+        t = (int)((j+1) / 2);
+        k=0;r=j;
+        while(t-- && k < n && r >= 0) {
+            temp = a[k][r];
+            a[k][r] = a[r][k];
+            a[r][k] = temp;
+            k++;
+            r--;
+        }
+    }
+    for(int i=1;i<n;i++) {
+        t = (n-i) / 2;
+        k = i;r=n-1;
+        while (t-- && k < n && r >= 0)
+        {
+            temp = a[k][r];
+            a[k][r] = a[r][k];
+            a[r][k] = temp;
+            k++;
+            r--;
+        }
+    }
+
+    for(k=0,r=n-1; k < r; k++,r--) {
+        for(int j=0;j<n;j++){
+            temp = a[r][j];
+            a[r][j] = a[k][j];
+            a[k][j] = temp;
+        }
+    }
+        cout<<"\n";
+        for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++)
+            cout<<a[i][j]<<" ";
+        cout<<"\n";
+    }
+
+}
+
+=========================================================================
