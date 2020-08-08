@@ -386,7 +386,7 @@ solution: (c++)
     let old val. a  and  new val b
        if we sore values as a + bn
        then val/n give new value and val%n give old val
-    1. increment every element by ( (A[i]%n)*n )
+    1. increment every element by ( (A[A[i]]%n)*n )
     2. divide every element by n
 ----------------
 void Solution::arrange(vector<int> &A) {
@@ -509,7 +509,7 @@ void almostSorted(vector<int> arr) {
             else if(r == 1 && k == i-1) {	// if this condition is gona true than surely "yes recursive" or "no" 
                 r = 2;
                 k = i;
-            } else if(r == 2 && k == i-1) {	// if update value k for recursive
+            } else if(r == 2 && k == i-1) {	// update value k for recursive
                 k = i;
             } else if(r == 1) {			//  i.e update k for swap 
                 k = i;
@@ -566,7 +566,7 @@ void almostSorted(vector<int> arr) {
 
 14
  move matrix to 90 degree in anticlock wise dir without in O(1) space
- 
+ // transepose than swaping
  ans:
  
  #include<bits/stdc++.h>
